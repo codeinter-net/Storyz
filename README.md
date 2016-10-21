@@ -1,2 +1,4 @@
 # storyz
-Stroy creation studio
+Story creation studio
+Written in C++ with FLTK library
+Enjoy
