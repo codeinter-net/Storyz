@@ -1,0 +1,436 @@
+# data file for the Fltk User Interface Designer (fluid)
+version 1.0303 
+header_name {.h} 
+code_name {.cxx}
+class MainInterface {open
+} {
+  Function {MainInterface()} {open
+  } {
+    Fl_Window mainWindow {
+      label STORYZ open
+      xywh {440 260 640 464} type Double hide
+    } {
+      Fl_Menu_Bar mainMenu {
+        xywh {0 0 640 20}
+      } {
+        Submenu menuFile {
+          label Fichier open
+          xywh {0 0 62 20}
+        } {
+          MenuItem {} {
+            label Nouveau
+            callback menuNew
+            xywh {0 0 30 20} shortcut 0x4006e
+          }
+          MenuItem {} {
+            label {Ouvrir ...}
+            callback menuOpen
+            xywh {0 0 100 20} shortcut 0x4006f
+          }
+          MenuItem {} {
+            label Sauver
+            callback menuSave
+            xywh {0 0 100 20} shortcut 0x40073
+          }
+          MenuItem {} {
+            label {Sauver sous ...}
+            callback menuSaveAs
+            xywh {0 0 100 20} shortcut 0x50073 divider
+          }
+          MenuItem {} {
+            label {Imprimer ...}
+            xywh {0 0 100 20} shortcut 0x40070
+          }
+          MenuItem {} {
+            label {Exporter ...}
+            xywh {0 0 100 20} shortcut 0x40065 divider
+          }
+          MenuItem {} {
+            label Quitter
+            callback menuQuit
+            xywh {0 0 100 20} shortcut 0x40071
+          }
+        }
+        Submenu {} {
+          label Edition open
+          xywh {0 0 62 20}
+        } {
+          MenuItem {} {
+            label Annuler
+            xywh {0 0 100 20} shortcut 0x4007a
+          }
+          MenuItem {} {
+            label Refaire
+            xywh {0 0 100 20} shortcut 0x40079 divider
+          }
+          MenuItem {} {
+            label Couper
+            xywh {0 0 100 20} shortcut 0x40078
+          }
+          MenuItem {} {
+            label Copier
+            xywh {0 0 100 20} shortcut 0x40063
+          }
+          MenuItem {} {
+            label Coller
+            xywh {0 0 100 20} shortcut 0x40076
+          }
+          MenuItem {} {
+            label Supprimer
+            xywh {0 0 100 20} shortcut 0xffff divider
+          }
+          MenuItem {} {
+            label {Tout sélectionner}
+            xywh {0 0 100 20} shortcut 0x40061
+          }
+        }
+        Submenu {} {
+          label Outils open
+          xywh {0 0 62 20}
+        } {
+          MenuItem {} {
+            label Environnement
+            xywh {0 0 100 20} shortcut 0x80065 divider
+          }
+          MenuItem {} {
+            label Personnages
+            callback menuOpenCharacter
+            xywh {0 0 100 20} shortcut 0x80070
+          }
+          MenuItem {} {
+            label Lieux
+            callback menuOpenPlan
+            xywh {0 0 30 20} shortcut 0x8006c
+          }
+          MenuItem {} {
+            label Actions
+            xywh {0 0 30 20} shortcut 0x80061
+          }
+          MenuItem {} {
+            label {Cartes et plans}
+            callback menuOpenMap
+            xywh {0 0 30 20} shortcut 0x8006d
+          }
+          MenuItem {} {
+            label Graphes
+            xywh {0 0 100 20} shortcut 0x80067
+          }
+          MenuItem {} {
+            label Notes
+            callback menuOpenNote
+            xywh {0 0 100 20} shortcut 0x8006e divider
+          }
+          MenuItem {} {
+            label {Préférences }
+            xywh {0 0 100 20}
+          }
+          MenuItem {} {
+            label Aide
+            xywh {0 0 30 20}
+          }
+        }
+      }
+      Fl_Group mainToolbar {
+        xywh {0 20 640 45} box FLAT_BOX color 55 align 132
+      } {
+        Fl_Button btnPerso {
+          callback toolbarOpenCharacter
+          image {icon/perso2.png} xywh {2 22 40 40} box NO_BOX down_box ROUNDED_BOX align 64
+        }
+        Fl_Button btnBook {
+          image {icon/book2.png} xywh {44 22 40 40} box NO_BOX down_box ROUNDED_BOX align 64
+        }
+        Fl_Group {} {open
+          xywh {170 20 470 45} resizable
+        } {}
+        Fl_Button btnNote {
+          callback toolbarOpenNote
+          image {icon/note2.png} xywh {86 22 40 40} box NO_BOX down_box ROUNDED_BOX align 64
+        }
+      }
+      Fl_Group {} {open
+        xywh {0 64 640 400}
+      } {
+        Fl_Group mainView {
+          xywh {0 64 640 400}
+        } {}
+      }
+    }
+    Fl_Window characterWindow {
+      label {STORYZ : Personnages}
+      xywh {424 229 580 480} type Double hide resizable
+    } {
+      Fl_Group {} {open
+        xywh {5 5 140 460}
+      } {
+        Fl_Group {} {open
+          xywh {10 410 135 55}
+        } {
+          Fl_Button {} {
+            label Nouveau
+            callback characterListNew
+            xywh {10 410 105 25}
+          }
+          Fl_Button {} {
+            label Supprimer
+            callback characterListDelete
+            xywh {10 440 105 25}
+          }
+          Fl_Button {} {
+            label {@2<}
+            callback characterListUp
+            xywh {120 410 25 25}
+          }
+          Fl_Button {} {
+            label {@2>}
+            callback characterListDown
+            xywh {120 440 25 25}
+          }
+        }
+        Fl_Group {} {open
+          xywh {5 5 140 400} resizable
+        } {
+          Fl_Browser characterList {
+            callback characterListCallback
+            xywh {10 10 135 395} type Hold
+          }
+        }
+      }
+      Fl_Group {} {open
+        xywh {150 20 405 66}
+      } {
+        Fl_Input characterName {
+          label Surnom
+          callback characterNameCallback
+          xywh {150 20 125 25} labelsize 11 align 5 when 1 deactivate
+        }
+        Fl_Input characterFullName {
+          label {Nom complet}
+          xywh {280 20 275 25} labelsize 11 align 5 deactivate
+        }
+        Fl_Input characterGender {
+          label Sexe
+          xywh {150 58 50 25} labelsize 11 align 5 when 1 deactivate
+        }
+        Fl_Input characterAge {
+          label Age
+          xywh {210 58 50 25} labelsize 11 align 5 when 1 deactivate
+        }
+        Fl_Input characterSize {
+          label Taille
+          xywh {270 60 50 25} labelsize 11 align 5 when 1 deactivate
+        }
+        Fl_Input characterWeight {
+          label Poids
+          xywh {330 60 50 25} labelsize 11 align 5 when 1 deactivate
+        }
+      }
+      Fl_Group {} {open
+        xywh {150 90 425 393} resizable
+      } {
+        Fl_Text_Editor characterDescription {
+          label Description
+          xywh {150 100 420 80} labelsize 11 align 5 deactivate
+          code0 {characterDescription->wrap_mode(characterDescription->WRAP_AT_BOUNDS,0);}
+        }
+        Fl_Text_Editor characterActions {
+          label Actions
+          xywh {150 195 420 80} labelsize 11 align 5 deactivate
+          code0 {characterActions->wrap_mode(characterActions->WRAP_AT_BOUNDS,0);}
+        }
+        Fl_Text_Editor characterGoals {
+          label Buts
+          xywh {150 290 420 80} labelsize 11 align 5 deactivate
+          code0 {characterGoals->wrap_mode(characterGoals->WRAP_AT_BOUNDS,0);}
+        }
+        Fl_Text_Editor characterLinks {
+          label Liens
+          xywh {150 385 420 80} labelsize 11 align 5 deactivate
+          code0 {characterLinks->wrap_mode(characterLinks->WRAP_AT_BOUNDS,0);}
+        }
+      }
+      Fl_Group {} {open
+        xywh {610 70 415 395}
+      } {}
+    }
+    Fl_Window noteWindow {
+      label {STORYZ : Notes}
+      xywh {1345 211 572 472} type Double hide resizable
+    } {
+      Fl_Browser noteList {
+        callback noteListCallback
+        xywh {10 10 135 395} type Hold resizable
+      }
+      Fl_Group {} {open
+        xywh {10 410 135 55}
+      } {
+        Fl_Button {} {
+          label Nouveau
+          callback noteListNew
+          xywh {10 410 105 25}
+        }
+        Fl_Button {} {
+          label Supprimer
+          callback noteListDelete
+          xywh {10 440 105 25}
+        }
+        Fl_Button {} {
+          label {@2<}
+          callback noteListUp
+          xywh {120 410 25 25}
+        }
+        Fl_Button {} {
+          label {@2>}
+          callback noteListDown
+          xywh {120 440 25 25}
+        }
+      }
+      Fl_Text_Editor noteText {
+        label {Texte libre}
+        xywh {150 69 420 398} labelsize 11 align 5 deactivate
+        code0 {noteText->wrap_mode(noteText->WRAP_AT_BOUNDS,0);}
+      }
+      Fl_Group {} {open
+        xywh {150 24 410 33}
+      } {
+        Fl_Input noteName {
+          label Nom
+          callback noteNameCallback
+          xywh {150 24 125 25} labelsize 11 align 5 when 1 deactivate
+        }
+      }
+    }
+    Fl_Window planWindow {
+      label {STORYZ : Plans} open
+      xywh {575 125 580 480} type Double hide resizable
+    } {
+      Fl_Browser planList {
+        callback planListCallback
+        xywh {10 10 135 395} type Hold
+      }
+      Fl_Group {} {open
+        xywh {10 410 135 55}
+      } {
+        Fl_Button {} {
+          label Nouveau
+          callback planListNew
+          xywh {10 410 105 25}
+        }
+        Fl_Button {} {
+          label Supprimer
+          callback planListDelete
+          xywh {10 440 105 25}
+        }
+        Fl_Button {} {
+          label {@2<}
+          callback planListUp
+          xywh {120 410 25 25}
+        }
+        Fl_Button {} {
+          label {@2>}
+          callback planListDown
+          xywh {120 440 25 25}
+        }
+      }
+      Fl_Text_Editor planText {
+        label {Texte libre}
+        xywh {150 365 420 100} labelsize 11 align 5 deactivate
+        code0 {planText->wrap_mode(planText->WRAP_AT_BOUNDS,0);}
+      }
+      Fl_Group {} {open
+        xywh {150 20 420 37}
+      } {
+        Fl_Input planName {
+          label Nom
+          callback planNameCallback
+          xywh {150 24 180 25} labelsize 11 align 5 when 1 deactivate resizable
+        }
+        Fl_Group {} {
+          label Image open
+          xywh {340 25 230 25} labelsize 11 align 5
+        } {
+          Fl_Button {} {
+            label Charger
+            callback planImageLoad
+            xywh {340 25 110 25}
+          }
+          Fl_Button {} {
+            label {+}
+            callback planImageZoomIn
+            xywh {455 25 25 25}
+          }
+          Fl_Button {} {
+            label {-}
+            callback planImageZoomOut
+            xywh {485 25 25 25}
+          }
+          Fl_Button {} {
+            label {@square}
+            callback planImageFull
+            xywh {515 25 25 25}
+          }
+          Fl_Button {} {
+            label X
+            callback planImageClear selected
+            xywh {545 25 25 25}
+          }
+        }
+      }
+      Fl_Scroll {} {open
+        xywh {150 60 420 295} resizable
+      } {
+        Fl_Box planImageBox {
+          label image
+          xywh {150 60 420 295} box DOWN_BOX resizable
+        }
+      }
+    }
+    Fl_Window mapWindow {
+      label {STORYZ : Cartes}
+      xywh {676 130 580 480} type Double hide resizable
+    } {
+      Fl_Browser mapList {
+        callback mapListCallback
+        xywh {10 10 135 395} type Hold resizable
+      }
+      Fl_Group {} {open
+        xywh {10 410 135 55}
+      } {
+        Fl_Button {} {
+          label Nouveau
+          callback mapListNew
+          xywh {10 410 105 25}
+        }
+        Fl_Button {} {
+          label Supprimer
+          callback mapListDelete
+          xywh {10 440 105 25}
+        }
+        Fl_Button {} {
+          label {@2<}
+          callback mapListUp
+          xywh {120 410 25 25}
+        }
+        Fl_Button {} {
+          label {@2>}
+          callback mapListDown
+          xywh {120 440 25 25}
+        }
+      }
+      Fl_Text_Editor mapText {
+        label {Texte libre}
+        xywh {150 69 420 397} labelsize 11 align 5 deactivate
+        code0 {mapText->wrap_mode(mapText->WRAP_AT_BOUNDS,0);}
+      }
+      Fl_Group {} {open
+        xywh {150 24 410 33}
+      } {
+        Fl_Input mapName {
+          label Nom
+          callback mapNameCallback
+          xywh {150 24 125 25} labelsize 11 align 5 when 1 deactivate
+        }
+      }
+    }
+  }
+} 
